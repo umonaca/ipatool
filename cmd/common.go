@@ -62,6 +62,7 @@ func newCookieJar(machine machine.Machine) http.CookieJar {
 	if fi, err := os.Stat(lockPath); err == nil && fi.Size() == 0 {
 		os.Remove(lockPath)
 	}
+
 	return util.Must(cookiejar.New(&cookiejar.Options{
 		Filename: cookiePath,
 	}))
