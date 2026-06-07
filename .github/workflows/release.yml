@@ -200,12 +200,15 @@ jobs:
           overwrite: false
           file_glob: true
       - uses: actions/checkout@v4
+        if: false
         with:
           repository: ${{ secrets.HOMEBREW_REPO }}
           ref: main
           token: ${{ secrets.GH_TOKEN }}
           path: homebrew-repo
-      - run: |
+      - name: Skip Homebrew
+        if: false
+        run: |
           cd homebrew-repo
           sed -i "3s/.*/    sha256 \"$SHA256_ARM64\"/" Casks/ipatool.rb
           sed -i "4s/.*/    url \"https:\/\/github.com\/majd\/ipatool\/releases\/download\/v${{ needs.get_version.outputs.version }}\/ipatool-${{ needs.get_version.outputs.version }}-macos-arm64.tar.gz\"/" Casks/ipatool.rb
